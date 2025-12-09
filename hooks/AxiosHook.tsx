@@ -12,10 +12,10 @@ export const useAxiosFetch = (axiosParams: AxiosRequestConfig) => {
       setLoading(true);
 
       const response = await axios.request(axiosParams);
-// hey need to know if u need to pass the values like 
-// checking like token u can perform from here not like this but maintaining in a certain area...
-// but from the axios bearer can token can checked
-// in such case u must had to use the concept of inceptor
+      // hey need to know if u need to pass the values like
+      // checking like token u can perform from here not like this but maintaining in a certain area...
+      // but from the axios bearer can token can checked
+      // in such case u must had to use the concept of inceptor
       if (response.status === 200) {
         setData(response.data);
       } else {

@@ -73,6 +73,11 @@ export default function TabsLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+      name="Product/[id]"
+      options={{href:null}}
+      />
     </Tabs>
   );
 }

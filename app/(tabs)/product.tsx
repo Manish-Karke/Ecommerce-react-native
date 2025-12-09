@@ -1,10 +1,11 @@
 import { ProductCard } from "@/components/productCard";
 import { useAxiosFetch } from "@/hooks/AxiosHook";
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View } from "react-native";
 import { Product } from "../../utils/type";
-
+import { useRouter } from "expo-router";
 export default function ProductScreen() {
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
 
   const { loading, data, error } = useAxiosFetch({
@@ -43,8 +44,12 @@ export default function ProductScreen() {
         keyExtractor={(item) => item.id.toString()}
         columnWrapperStyle={{ justifyContent: "space-between" }}
         renderItem={({ item }) => (
-          <View style={{ width: "48%", marginBottom: 15 }}>
-            <ProductCard product={item} />
+          <View style={{ width: "48%", marginBottom: 10 }}>
+          
+          <ProductCard product={item} onPress={() => router.push(`/Product/${item.id}`)} 
+          onPressAddToCart={() => console.log("Add to Cart:", item)}
+         />
+           
           </View>
         )}
       />

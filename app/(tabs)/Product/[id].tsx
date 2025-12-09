@@ -1,15 +1,20 @@
 import { useAxiosFetch } from "@/hooks/AxiosHook";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useEffect } from "react";
 import { View, Text, Image, ActivityIndicator, ScrollView } from "react-native";
 
 export default function ProductDetail() {
   const { id } = useLocalSearchParams();
-
+ const navigation = useNavigation();
   const { loading, data: product, error } = useAxiosFetch({
     url: `/products/${id}`,
     method: "GET",
   });
-
+  useEffect(() => {
+    if (product?.title) {
+      navigation.setOptions({ title: product.title });
+    }
+  }, [product]);
   if (loading) {
     return (
       <View className="flex-1 justify-center items-center">

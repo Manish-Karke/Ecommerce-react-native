@@ -1,6 +1,6 @@
+import { Product } from "@/types/type";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { Product } from "@/utils/type";
 export interface ProductCardProps {
   product: Product;
   onPress?: () => void;

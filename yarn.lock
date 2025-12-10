@@ -1884,6 +1884,18 @@
   resolved "https://registry.yarnpkg.com/@standard-schema/utils/-/utils-0.3.0.tgz#3d5e608f16c2390c10528e98e59aef6bf73cae7b"
   integrity sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==
 
+"@tanstack/query-core@5.90.12":
+  version "5.90.12"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.90.12.tgz#e1f5f47e72ef7d0fc794325936921c700352515e"
+  integrity sha512-T1/8t5DhV/SisWjDnaiU2drl6ySvsHj1bHBCWNXd+/T+Hh1cf6JodyEYMd5sgwm+b/mETT4EV3H+zCVczCU5hg==
+
+"@tanstack/react-query@^5.90.12":
+  version "5.90.12"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.90.12.tgz#49536842eff6487a9e645a453fea2642d8f4f209"
+  integrity sha512-graRZspg7EoEaw0a8faiUASCyJrqjKPdqJ9EwuDRUF9mEYJ1YPczI9H+/agJ0mOJkPCJDk0lsz5QTrLZ/jQ2rg==
+  dependencies:
+    "@tanstack/query-core" "5.90.12"
+
 "@tybys/wasm-util@^0.10.0":
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/@tybys/wasm-util/-/wasm-util-0.10.1.tgz#ecddd3205cf1e2d5274649ff0eedd2991ed7f414"
@@ -1977,7 +1989,7 @@
   dependencies:
     undici-types "~7.16.0"
 
-"@types/react@~19.1.0":
+"@types/react@~19.1.10":
   version "19.1.17"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-19.1.17.tgz#8be0b9c546cede389b930a98eb3fad1897f209c3"
   integrity sha512-Qec1E3mhALmaspIrhWt9jkQMNdw6bReVu64mjvhbhq2NFPftLPVr+l1SZgmw/66WwBNpDh7ao5AT6gF5v41PFA==
@@ -6172,38 +6184,23 @@ react-native-gesture-handler@~2.28.0:
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
 
-react-native-is-edge-to-edge@1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.1.7.tgz#28947688f9fafd584e73a4f935ea9603bd9b1939"
-  integrity sha512-EH6i7E8epJGIcu7KpfXYXiV2JFIYITtq+rVS8uEb+92naMRBdxhTuS8Wn2Q7j9sqyO0B+Xbaaf9VdipIAmGW4w==
-
 react-native-is-edge-to-edge@^1.1.6, react-native-is-edge-to-edge@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/react-native-is-edge-to-edge/-/react-native-is-edge-to-edge-1.2.1.tgz#64e10851abd9d176cbf2b40562f751622bde3358"
   integrity sha512-FLbPWl/MyYQWz+KwqOZsSyj2JmLKglHatd3xLZWskXOpRaio4LfEDEz8E/A6uD8QoTHW6Aobw1jbEwK7KMgR7Q==
 
-react-native-reanimated@~3.17.4:
-  version "3.17.5"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.17.5.tgz#09ebe3c9e3379c5c0c588b7ab30c131ea29b60f0"
-  integrity sha512-SxBK7wQfJ4UoWoJqQnmIC7ZjuNgVb9rcY5Xc67upXAFKftWg0rnkknTw6vgwnjRcvYThrjzUVti66XoZdDJGtw==
+react-native-reanimated@~4.1.1:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-4.1.6.tgz#9d3d06416eaf48ab25594611185f66b34e404291"
+  integrity sha512-F+ZJBYiok/6Jzp1re75F/9aLzkgoQCOh4yxrnwATa8392RvM3kx+fiXXFvwcgE59v48lMwd9q0nzF1oJLXpfxQ==
   dependencies:
-    "@babel/plugin-transform-arrow-functions" "^7.0.0-0"
-    "@babel/plugin-transform-class-properties" "^7.0.0-0"
-    "@babel/plugin-transform-classes" "^7.0.0-0"
-    "@babel/plugin-transform-nullish-coalescing-operator" "^7.0.0-0"
-    "@babel/plugin-transform-optional-chaining" "^7.0.0-0"
-    "@babel/plugin-transform-shorthand-properties" "^7.0.0-0"
-    "@babel/plugin-transform-template-literals" "^7.0.0-0"
-    "@babel/plugin-transform-unicode-regex" "^7.0.0-0"
-    "@babel/preset-typescript" "^7.16.7"
-    convert-source-map "^2.0.0"
-    invariant "^2.2.4"
-    react-native-is-edge-to-edge "1.1.7"
+    react-native-is-edge-to-edge "^1.2.1"
+    semver "7.7.2"
 
-react-native-safe-area-context@5.4.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-5.4.0.tgz#04b51940408c114f75628a12a93569d30c525454"
-  integrity sha512-JaEThVyJcLhA+vU0NU8bZ0a1ih6GiF4faZ+ArZLqpYbL6j7R3caRqj+mE3lEtKCuHgwjLg3bCxLL1GPUJZVqUA==
+react-native-safe-area-context@~5.6.0:
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-5.6.2.tgz#283e006f5b434fb247fcb4be0971ad7473d5c560"
+  integrity sha512-4XGqMNj5qjUTYywJqpdWZ9IG8jgkS3h06sfVjfw5yZQZfWnRFXczi0GnYyFyCc2EBps/qFmoCH8fez//WumdVg==
 
 react-native-screens@~4.16.0:
   version "4.16.0"
@@ -7625,3 +7622,8 @@ zod@^4.1.13:
   version "4.1.13"
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.1.13.tgz#93699a8afe937ba96badbb0ce8be6033c0a4b6b1"
   integrity sha512-AvvthqfqrAhNH9dnfmrfKzX5upOdjUVJYFqNSlkmGf64gRaTzlPwz99IHYnVs28qYAybvAlBV+H7pn0saFY4Ig==
+
+zustand@^5.0.9:
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-5.0.9.tgz#389dcd0309b9c545d7a461bd3c54955962847654"
+  integrity sha512-ALBtUj0AfjJt3uNRQoL1tL2tMvj6Gp/6e39dnfT6uzpelGru8v1tPOGBzayOWbPJvujM8JojDk3E1LxeFisBNg==

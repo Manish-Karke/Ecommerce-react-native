@@ -1,35 +1,38 @@
 import { ProductCard } from "@/components/productCard";
-import { useAxiosFetch } from "@/hooks/AxiosHook";
-import React, { useEffect, useState } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
-import { Product } from "../../utils/type";
+import { useFetch } from "@/hooks/useFetch";
+import { useCart } from "@/store/store";
 import { useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { FlatList, Text, View } from "react-native";
+import { Product } from "../../types/type";
 export default function ProductScreen() {
   const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
 
-  const { loading, data, error } = useAxiosFetch({
-    url: "/products",
-    method: "GET",
-  });
+  const { data, isLoading, isError } = useFetch("/products");
 
+  const addToCart = useCart((state) => state.addToCart);
+  const cart = useCart((state) => state.cart);
+
+  console.log(cart);
   useEffect(() => {
     if (data) {
       setProducts(data);
     }
   }, [data]);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center">
         <Text>Loading...</Text>
       </View>
     );
   }
-  if (error) {
+
+  if (isError) {
     return (
       <View className="flex-1 justify-center items-center text-red-600">
-        <Text>{error}</Text>
+        <Text>{isError}</Text>
       </View>
     );
   }
@@ -45,11 +48,17 @@ export default function ProductScreen() {
         columnWrapperStyle={{ justifyContent: "space-between" }}
         renderItem={({ item }) => (
           <View style={{ width: "48%", marginBottom: 10 }}>
-          
-          <ProductCard product={item} onPress={() => router.push(`/Product/${item.id}`)} 
-          onPressAddToCart={() => console.log("Add to Cart:", item)}
-         />
-           
+            <ProductCard
+              product={item}
+              onPress={() => router.push(`../Product/${item.id}`)}
+              onPressAddToCart={() =>
+                addToCart({
+                  ...item,
+                  price: item.price,
+                  quantity: 1,
+                })
+              }
+            />
           </View>
         )}
       />

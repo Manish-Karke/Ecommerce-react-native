@@ -3,7 +3,7 @@ import { ScrollView, Text, View } from "react-native";
 
 export default function About() {
   return (
-    <ScrollView className="flex-1 p-5 bg-white">
+    <ScrollView className="flex-1 p-5">
       <Text className="text-3xl font-bold mb-4 text-center">Welcome to ShopEasy!</Text>
 
       <Text className="text-base mb-4 text-gray-700">

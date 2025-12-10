@@ -1,7 +1,8 @@
+import CustomButton from "@/components/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { FormInput } from "../../components/formResuable";
 import { LoginFormType, LoginSchema } from "../../utils/schema";
 
@@ -19,7 +20,6 @@ export default function Login() {
   const onSubmit = (data: LoginFormType) => {
     console.log(data);
     router.replace("/product");
-
   };
 
   return (
@@ -45,12 +45,15 @@ export default function Login() {
       />
 
       <View className="mt-4 w-full">
-        <Pressable
+        <CustomButton
+          title="Login"
+          variant="primary"
+          size="large"
           onPress={handleSubmit(onSubmit)}
-          className="bg-blue-500 rounded-lg py-2 px-8 items-center justify-center "
-        >
-          <Text className="text-white font-bold text-base">Submit</Text>
-        </Pressable>
+          rounded
+          fullWidth
+          className="shadow-md"
+        />
       </View>
     </View>
   );

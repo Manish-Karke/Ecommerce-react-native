@@ -8,6 +8,7 @@ export default function TabsLayout() {
       screenOptions={{
         tabBarActiveTintColor: "#2563eb", 
         tabBarInactiveTintColor: "#9ca3af", 
+         headerShown: false,
         tabBarStyle: {
           backgroundColor: "#ffffff",
           borderTopWidth: 1,
@@ -19,7 +20,7 @@ export default function TabsLayout() {
           fontSize: 12,
           fontWeight: "600",
         },
-        headerShown: true,
+       
         headerStyle: {
           backgroundColor: "#2563eb",
         },
@@ -30,16 +31,7 @@ export default function TabsLayout() {
       }}
     >
     
-      {/* <Tabs.Screen
-        name="index"
-        options={{
-          title: "index",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="home" size={size} color={color} />
-          ),
-        }}
-      /> */}
-
+    
      
       <Tabs.Screen
         name="product"
@@ -51,17 +43,7 @@ export default function TabsLayout() {
         }}
       />
 
-   
-      {/* <Tabs.Screen
-        name="cart"
-        options={{
-          title: "Cart",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="cart" size={size} color={color} />
-          ),
-          tabBarBadge: 3, 
-        }}
-      /> */}
+ 
 
     
       <Tabs.Screen
@@ -74,10 +56,17 @@ export default function TabsLayout() {
         }}
       />
 
-      <Tabs.Screen
-      name="Product/[id]"
-      options={{href:null}}
+       <Tabs.Screen
+        name="cart"
+        options={{
+          title: "Cart",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="cart" size={size} color={color} />
+          ),
+        }}
       />
+
+     
     </Tabs>
   );
 }

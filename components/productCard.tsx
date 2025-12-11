@@ -1,12 +1,7 @@
-import { Product } from "@/types/type";
+import { Product, ProductCardProps } from "@/types/type";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-export interface ProductCardProps {
-  product: Product;
-  onPress?: () => void;
-  onPressAddToCart?: () => void;
-  containerClass?: string;
-}
+
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
@@ -22,7 +17,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
     >
       <View style={{ width: "100%", height: 180, backgroundColor: "#f3f4f6" }}>
         <Image
-          source={{ uri: product.image || " " }}
+          source={{ uri: product.images[0] || " " }}
           style={{ width: "100%", height: "100%" }}
           resizeMode="contain"
         />

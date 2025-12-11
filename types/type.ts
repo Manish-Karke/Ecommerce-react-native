@@ -3,17 +3,17 @@ export type Product = {
   title: string;
   description: string;
   price: number;
-  image?: string | null;
+  images: string[];
   rating: number;
   category: string;
 };
 
-export type ProductCardProps = {
+export interface ProductCardProps {
   product: Product;
   onPress?: () => void;
   onPressAddToCart?: () => void;
   containerClass?: string;
-};
+}
 
 export type CartItem = {
   id: number;
@@ -33,10 +33,10 @@ export type CartState = {
 export interface CustomButtonProps {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary';
-  size?: 'small' | 'medium' | 'large';
+  variant?: "primary" | "secondary";
+  size?: "small" | "medium" | "large";
   disabled?: boolean;
   rounded?: boolean;
   fullWidth?: boolean;
-  className?: string; 
+  className?: string;
 }

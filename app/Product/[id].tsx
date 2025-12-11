@@ -1,7 +1,7 @@
 import { useFetch } from "@/hooks/useFetch";
 import { useCart } from "@/store/store";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import {
   ActivityIndicator,
   Button,
@@ -15,17 +15,28 @@ export default function ProductDetail() {
   const { id } = useLocalSearchParams();
   const navigation = useNavigation();
 
-  // FIX: call the store as a hook
+  // Correct hook call
   const { addToCart } = useCart();
 
-  const { data: product, isLoading, isError } = useFetch(`/products/${id}`);
+  // Fetch product WITHOUT page
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useFetch<any>({
+    queryKey: ["product", id],
+    url: `/products/${id}`,
+    enabled: true,
+  });
 
-  useEffect(() => {
+  // Set dynamic title (no useEffect)
+  useLayoutEffect(() => {
     if (product?.title) {
       navigation.setOptions({ title: product.title });
     }
   }, [product]);
 
+  // Loading UI
   if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center">
@@ -35,14 +46,16 @@ export default function ProductDetail() {
     );
   }
 
-  if (isError || !product) {
+  // Error UI
+  if (error || !product) {
     return (
       <View className="flex-1 justify-center items-center">
-        <Text className="text-red-500">{isError || "No product found"}</Text>
+        <Text className="text-red-500">{"No product found"}</Text>
       </View>
     );
   }
 
+  // Cart handler
   const handleAdd = () => {
     addToCart(product);
   };
@@ -50,7 +63,7 @@ export default function ProductDetail() {
   return (
     <ScrollView className="p-5">
       <Image
-        source={{ uri: product.image }}
+       source={{ uri: product.images[0] || " " }}
         style={{
           width: "100%",
           height: 280,
@@ -69,6 +82,7 @@ export default function ProductDetail() {
       <Text className="text-base text-gray-700 mt-4">
         {product.description}
       </Text>
+
       <View className="gap-4 m-4">
         <Button title="Add to Cart" onPress={handleAdd} />
         <Button title="Return Product" onPress={() => router.back()} />

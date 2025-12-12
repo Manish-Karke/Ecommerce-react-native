@@ -70,3 +70,7 @@ export type PostApiParams<T> = {
   url: string;
   formData: T;
 };
+
+export type UserResponse = {
+  users:User[];
+} 

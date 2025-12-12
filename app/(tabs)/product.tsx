@@ -1,6 +1,6 @@
-import CustomButton from "@/components/button";
+import CustomButton from "../../components/CustomButton";
 import { ProductCard } from "@/components/productCard";
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch } from "@/hooks/getFetch";
 import { useCart } from "@/store/store";
 import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";
@@ -14,7 +14,7 @@ export default function ProductScreen() {
 
   const { data, isLoading, error, isFetching } = useFetch<any[]>({
     queryKey: ["products", page],
-    url: "https://api.escuelajs.co/api/v1/products",
+    url: "/products",
     params: { offset: (page - 1) * limit, limit },
   });
 

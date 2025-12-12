@@ -1,6 +1,7 @@
-import React, { useMemo } from "react";
-import { View, Text, FlatList, TouchableOpacity } from "react-native";
+import { createRenderItem } from "@/components/CartRender";
 import { useCart } from "@/store/store";
+import { useMemo } from "react";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { useShallow } from "zustand/shallow";
 
 export default function Cart() {
@@ -19,33 +20,7 @@ export default function Cart() {
     [cart]
   );
 
-  const renderItem = ({item}:any) => (
-    <View className="flex-row justify-between items-center py-2 border-b border-gray-300">
-      <Text className="flex-1 text-gray-800 text-sm">
-        {item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}
-      </Text>
-
-      <View className="flex-row items-center mx-2">
-        <TouchableOpacity
-          className="bg-blue-600 px-2 py-1 rounded"
-          onPress={() => removeCart(item.id)}
-          disabled={item.quantity <= 0}
-        >
-          <Text className="text-white text-base">-</Text>
-        </TouchableOpacity>
-
-        <Text className="mx-2 text-sm">{item.quantity}</Text>
-
-        <TouchableOpacity className="bg-blue-600 px-2 py-1 rounded" onPress={() => addCart(item)}>
-          <Text className="text-white text-base">+</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Text className="text-gray-800 text-sm w-16 text-right">
-        ${(item.price * item.quantity).toFixed(2)}
-      </Text>
-    </View>
-  );
+  const renderItem = createRenderItem(addCart, removeCart);
 
   return (
     <View className="p-4 bg-gray-200 rounded-md flex-1">
@@ -71,7 +46,6 @@ export default function Cart() {
         <Text className="text-sm font-semibold">${totalPrice.toFixed(2)}</Text>
       </View>
 
-     
       {cart.length > 0 && (
         <TouchableOpacity
           className="bg-red-600 px-4 py-2 rounded mt-4 items-center"

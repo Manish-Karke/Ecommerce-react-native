@@ -1,4 +1,4 @@
-import { useFetch } from "@/hooks/useFetch";
+import { useFetch } from "@/hooks/getFetch";
 import { useCart } from "@/store/store";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { useLayoutEffect } from "react";
@@ -26,7 +26,7 @@ export default function ProductDetail() {
   } = useFetch<any>({
     queryKey: ["product", id],
     url: `/products/${id}`,
-    enabled: true,
+    enabled: !!id,
   });
 
   // Set dynamic title (no useEffect)
@@ -63,7 +63,7 @@ export default function ProductDetail() {
   return (
     <ScrollView className="p-5">
       <Image
-       source={{ uri: product.images[0] || " " }}
+        source={{ uri: product.images[0] || " " }}
         style={{
           width: "100%",
           height: 280,

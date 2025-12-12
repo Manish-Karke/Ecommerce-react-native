@@ -1,3 +1,5 @@
+import { type QueryKey } from "@tanstack/react-query";
+
 export type Product = {
   id: number;
   title: string;
@@ -40,3 +42,31 @@ export interface CustomButtonProps {
   fullWidth?: boolean;
   className?: string;
 }
+
+export interface UseGetHooksProps<T> {
+  queryKey: QueryKey;
+  url: string;
+  params?: any;
+  enabled?: boolean;
+}
+
+export interface PostHookProps<T> {
+  url: string;
+ 
+}
+
+export type User = {
+  id: number;
+  email: string;
+  password: string;
+  name: string;
+  role: string;
+  avatar: string;
+  creationAt: string;
+  updatedAt: string;
+};
+
+export type PostApiParams<T> = {
+  url: string;
+  formData: T;
+};

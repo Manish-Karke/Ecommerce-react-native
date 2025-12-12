@@ -1,20 +1,24 @@
-import CustomButton from "../../components/CustomButton";
+import { useSendPost } from "@/hooks/getFetch";
 import { zodResolver } from "@hookform/resolvers/zod";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { Text, View } from "react-native";
+import CustomButton from "../../components/CustomButton";
 import { FormInput } from "../../components/formResuable";
 import { LoginFormType, LoginSchema } from "../../utils/schema";
-import { useSendPost } from "@/hooks/getFetch";
-
 export default function Login() {
   const router = useRouter();
 
-  const { control, handleSubmit, formState: { errors } } = useForm<LoginFormType>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormType>({
     resolver: zodResolver(LoginSchema),
   });
 
-  const { mutateAsync, isPending, isError } = useSendPost<{ token: string }>({
+  const { mutateAsync, isPending, isError } = useSendPost<{ access_token: string }>({
     url: "/auth/login",
   });
 
@@ -25,6 +29,7 @@ export default function Login() {
 
     try {
       const res = await mutateAsync(formData);
+      await AsyncStorage.setItem("token", res.access_token);
       router.replace("/product");
     } catch (err) {
       console.log("Login failed:", err);

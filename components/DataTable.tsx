@@ -10,7 +10,7 @@ interface DataTableProps<T> {
   data: T[];
   columns: ColumnDef<T, any>[];
 }
-
+/// searching add garne
 export const DataTable = <T,>({ data, columns }: DataTableProps<T>) => {
   const table = useReactTable({
     data,

@@ -52,3 +52,24 @@ export const ApiPost = async <T>({
     throw err;
   }
 };
+
+export const RegisterUser = async <T>({
+  url,
+  formData,
+}: PostApiParams<T>): Promise<AxiosResponse<T>> => {
+  try {
+    const response = await instance({
+      url: `${url}`,
+      data: formData,
+      transformResponse: [
+        function (responseData) {
+          return JSON.parse(responseData);
+        },
+      ],
+    });
+    return response;
+  } catch (error) {
+    const err = error as AxiosError<Record<string, string>>;
+    throw err;
+  }
+};

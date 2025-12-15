@@ -1,4 +1,4 @@
-import { ApiData, ApiPost } from "@/api/axios";
+import { ApiData, ApiPost, RegisterUser } from "@/api/axios";
 import { PostHookProps, UseGetHooksProps } from "@/types/type";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -34,3 +34,18 @@ export const useSendPost = <T,>({ url }: PostHookProps<T>) => {
     },
   });
 };
+
+
+export const useRegister =<T, >({
+  url
+}:PostHookProps<T> )=>{
+  return useMutation({
+    mutationFn: async (payload:any) => {
+      const response = await RegisterUser<T>({
+        url:url,
+        formData:payload
+      })
+      return response.data
+    }
+  })
+}

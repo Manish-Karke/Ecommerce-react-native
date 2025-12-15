@@ -52,18 +52,17 @@ export interface UseGetHooksProps<T> {
 
 export interface PostHookProps<T> {
   url: string;
- 
 }
 
 export type User = {
   id: number;
   email: string;
-  password: string;
+  password?: string;
   name: string;
   role: string;
-  avatar: string;
-  creationAt: string;
-  updatedAt: string;
+  avatar?: string;
+  creationAt?: string;
+  updatedAt?: string;
 };
 
 export type PostApiParams<T> = {
@@ -74,3 +73,11 @@ export type PostApiParams<T> = {
 export type UserResponse = {
   users:User[];
 } 
+
+export type RegisterPayload={
+  email:string;
+  password:string;
+  name:string;
+  avatar?:string;
+  role?:"customer"|"admin"
+}

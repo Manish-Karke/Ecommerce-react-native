@@ -54,6 +54,14 @@ export interface PostHookProps<T> {
   url: string;
 }
 
+export type Users={
+  id:number;
+  email: string;
+  name:string;
+  role:string;
+}
+
+
 export type User = {
   id: number;
   email: string;
@@ -69,6 +77,11 @@ export type PostApiParams<T> = {
   url: string;
   formData: T;
 };
+export type UserResponses = {
+  users:User[];
+} 
+
+
 
 export type UserResponse = {
   users:User[];

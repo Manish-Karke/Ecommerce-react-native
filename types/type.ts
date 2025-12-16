@@ -59,7 +59,7 @@ export type Users={
   email: string;
   name:string;
   role:string;
-  avatar:string;
+  avatar?:string;
 }
 export type UserResponses = {
   users:Users[];

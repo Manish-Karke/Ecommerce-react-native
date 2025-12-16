@@ -1,46 +1,29 @@
 import { FormInput } from "@/components/formResuable";
 import { AddUserFormValues } from "@/types/type";
-import { useMutation } from "@apollo/client";
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { Text, TouchableOpacity, View } from "react-native";
-import { QUERY_ADDUSER } from "../../graphql/mutation";
 
-export default function AddUserForm() {
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<AddUserFormValues>({
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      role: "admin",
-      avatar: "https://placehold.co/100x100",
-    },
-  });
-
-  const [ADDUSER, { loading, error }] = useMutation(QUERY_ADDUSER);
-
-  const onSubmit: SubmitHandler<AddUserFormValues> = async (data) => {
-    try {
-      await ADDUSER({
-        variables: { data },
-      });
-      alert("User created successfully ✅");
-      reset();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+type AddUserFormProps = {
+  form: UseFormReturn<AddUserFormValues>;
+  onSubmit: SubmitHandler<AddUserFormValues>;
+  loading?: boolean;
+  error?: any;
+};
+export default function AddUserForm({
+  form,
+  onSubmit,
+  loading,
+  error,
+}: AddUserFormProps) {
+  const { control, handleSubmit, formState } = form;
+  const { errors } = formState;
   return (
     <View>
       <Text className="font-bold items-center ml-10 justify-items-center bg-slate-500 mt-4">
         Adding new user
       </Text>
+
       <FormInput
         control={control}
         name="name"
@@ -76,13 +59,14 @@ export default function AddUserForm() {
 
       <TouchableOpacity
         className="bg-red-600 p-5 rounded-xl mt-2"
-        onPress={handleSubmit(onSubmit)}
+        onPress={form.handleSubmit(onSubmit)}
         disabled={loading}
       >
         <Text className="text-yellow-500 text-center font-bold">
           {loading ? "creating..." : "create user"}
         </Text>
       </TouchableOpacity>
+
       {error && <Text className="text-red-600 mt-4">{error.message}</Text>}
     </View>
   );

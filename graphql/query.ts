@@ -34,3 +34,14 @@ export const QUERY_USERLIST = gql`
   }
 `;
 
+export const QUERY_GETUSER = gql`
+  query getUser($id: ID!) {
+    user(id: $id) {
+      id
+      name
+      email
+      role
+      avatar
+    }
+  }
+`;

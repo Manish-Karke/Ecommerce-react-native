@@ -11,9 +11,6 @@ export const TOGGLE_IS_SELECTED_TABLE = gql`
   }
 `;
 
-
-
-
 export const QUERY_ADDUSER = gql`
   mutation addUser($data: CreateUserDto!) {
     addUser(data: $data) {
@@ -22,6 +19,18 @@ export const QUERY_ADDUSER = gql`
       name
       avatar
       role
+    }
+  }
+`;
+
+export const QUERY_UPDATEUSER = gql`
+  mutation UpdateUser($id: ID!, $changes: UpdateUserDto!) {
+    updateUser(id: $id, changes: $changes) {
+      id
+      name
+      email
+      role
+      avatar
     }
   }
 `;

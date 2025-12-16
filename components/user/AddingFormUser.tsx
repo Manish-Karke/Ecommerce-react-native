@@ -20,9 +20,7 @@ export default function AddUserForm({
   const { errors } = formState;
   return (
     <View>
-      <Text className="font-bold items-center ml-10 justify-items-center bg-slate-500 mt-4">
-        Adding new user
-      </Text>
+      
 
       <FormInput
         control={control}

@@ -29,6 +29,7 @@ export const QUERY_USERLIST = gql`
       name
       email
       role
+      avatar
     }
   }
 `;

@@ -1,32 +1,61 @@
+import { useQuery } from '@apollo/client/react';
+import { QUERY_USERLIST } from '../../graphql/query';
+import { UserResponses, Users } from '../../types/type';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 
-// import { useQuery } from '@apollo/client/react';
-// import { QUERY_USERLIST } from '../../graphql/query';
-// import { UserResponses, Users } from '../../types/type';
+export default function UserList() {
+  const { loading, error, data } = useQuery<UserResponses>(QUERY_USERLIST);
 
-// export default function UserList() {
-//   const { loading, error, data } = useQuery<UserResponses>(QUERY_USERLIST);
+  if (loading) {
+    return (
+      <View className="flex-1 justify-center items-center">
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
 
-//   if (loading) return <p>Loading users...</p>;
-//   if (error) return <p>Error: {error.message}</p>;
+  if (error) {
+    return (
+      <View className="p-4">
+        <Text className="text-red-500">Error: {error.message}</Text>
+      </View>
+    );
+  }
 
-//   const users: Users[] = data?.users || [];
+  const users: Users[] = data?.users || [];
 
-//   return (
-//     <div>
-//       <h2>User List ({users.length})</h2>
-//       <ul>
-//         {users.map((user) => (
-//           <li key={user.id} style={{ marginBottom: '16px' }}>
-//             {/* <img
-//               src={user.avatar}
-//               alt={user.name}
-//               width={50}
-//               style={{ borderRadius: '50%', marginRight: '12px' }}
-//             /> */}
-//             <strong>{user.name}</strong> ({user.email}) — <em>{user.role}</em>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// }
+  return (
+    <View className="flex-1 p-4 bg-white">
+      <Text className="text-xl font-bold mb-4">
+        User List ({users.length})
+      </Text>
+
+      <FlatList
+        data={users}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View className="flex-row items-center mb-4 p-3 bg-gray-100 rounded-xl">
+            <Image
+              source={{ uri: item.avatar }}
+              className="w-12 h-12 rounded-full mr-3"
+            />
+
+            <View>
+              <Text className="font-semibold text-base">{item.name}</Text>
+              <Text className="text-gray-600 text-sm">{item.email}</Text>
+              <Text className="text-gray-500 italic text-xs">
+                {item.role}
+              </Text>
+            </View>
+          </View>
+        )}
+      />
+    </View>
+  );
+}

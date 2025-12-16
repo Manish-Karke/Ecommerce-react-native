@@ -1,13 +1,15 @@
-import { useQuery } from '@apollo/client/react';
-import { QUERY_USERLIST } from '../../graphql/query';
-import { UserResponses, Users } from '../../types/type';
+import AddUserForm from "@/components/user/AddingFormUser";
+import { useQuery } from "@apollo/client/react";
 import {
-  View,
-  Text,
-  Image,
-  FlatList,
   ActivityIndicator,
-} from 'react-native';
+  FlatList,
+  Image,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
+import { QUERY_USERLIST } from "../../graphql/query";
+import { UserResponses, Users } from "../../types/type";
 
 export default function UserList() {
   const { loading, error, data } = useQuery<UserResponses>(QUERY_USERLIST);
@@ -31,31 +33,39 @@ export default function UserList() {
   const users: Users[] = data?.users || [];
 
   return (
-    <View className="flex-1 p-4 bg-white">
-      <Text className="text-xl font-bold mb-4">
-        User List ({users.length})
-      </Text>
+    <ScrollView>
+      <View className="flex-1 p-4 bg-white">
+        <section>
+          <Text className="text-xl font-bold mb-4">
+            User List ({users.length})
+          </Text>
 
-      <FlatList
-        data={users}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View className="flex-row items-center mb-4 p-3 bg-gray-100 rounded-xl">
-            <Image
-              source={{ uri: item.avatar }}
-              className="w-12 h-12 rounded-full mr-3"
-            />
+          <FlatList
+            data={users}
+            keyExtractor={(item) => item.id.toString()}
+            ListHeaderComponent={<AddUserForm />}
+            renderItem={({ item }) => (
+              <View className="flex-row items-center mb-4 p-3 bg-gray-100 rounded-xl">
+                <Image
+                  source={{ uri: item.avatar }}
+                  className="w-12 h-12 rounded-full mr-3"
+                />
+                <View>
+                  <Text className="font-semibold text-base">{item.name}</Text>
+                  <Text className="text-gray-600 text-sm">{item.email}</Text>
+                  <Text className="text-gray-500 italic text-xs">
+                    {item.role}
+                  </Text>
+                </View>
+              </View>
+            )}
+          />
+        </section>
 
-            <View>
-              <Text className="font-semibold text-base">{item.name}</Text>
-              <Text className="text-gray-600 text-sm">{item.email}</Text>
-              <Text className="text-gray-500 italic text-xs">
-                {item.role}
-              </Text>
-            </View>
-          </View>
-        )}
-      />
-    </View>
+        <section>
+          <AddUserForm />
+        </section>
+      </View>
+    </ScrollView>
   );
 }

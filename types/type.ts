@@ -59,8 +59,11 @@ export type Users={
   email: string;
   name:string;
   role:string;
+  avatar:string;
 }
-
+export type UserResponses = {
+  users:Users[];
+} 
 
 export type User = {
   id: number;
@@ -77,9 +80,7 @@ export type PostApiParams<T> = {
   url: string;
   formData: T;
 };
-export type UserResponses = {
-  users:User[];
-} 
+
 
 
 
@@ -94,3 +95,12 @@ export type RegisterPayload={
   avatar?:string;
   role?:"customer"|"admin"
 }
+
+
+export type AddUserFormValues = {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  avatar: string;
+};

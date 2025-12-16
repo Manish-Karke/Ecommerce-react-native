@@ -10,3 +10,18 @@ export const TOGGLE_IS_SELECTED_TABLE = gql`
     }
   }
 `;
+
+
+
+
+export const QUERY_ADDUSER = gql`
+  mutation addUser($data: CreateUserDto!) {
+    addUser(data: $data) {
+      id
+      email
+      name
+      avatar
+      role
+    }
+  }
+`;

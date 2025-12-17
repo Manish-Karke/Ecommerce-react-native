@@ -4,26 +4,25 @@ import React, { useState } from "react";
 import { TextInput, View } from "react-native";
 import { searchCache, searchVar } from "./localState/cache";
 import { SEARCH_PRODUCT } from "./localState/localQuery";
+import { useDebouncedValue } from "./Debounceforsearch";
 
 type SearchInputProps = {
-  value: string;
-  onChange: (text: string) => void;
+ 
   placeholder?: string;
 };
 
 export function SearchInput({
-  value,
-  onChange,
+  
   placeholder = "Search...",
 }: SearchInputProps) {
   const [searchValue, setSearchValue] = useState("");
-
+  const debounceSearch = useDebouncedValue(searchValue,500)
   const handleSearchValue = (value: string) => {
     setSearchValue(value);
     searchCache.writeQuery({
       query: SEARCH_PRODUCT,
       data: {
-        searchText: searchVar(value),
+        searchText: searchVar(debounceSearch),
       },
     });
   };

@@ -1,12 +1,17 @@
-import debounce from "lodash.debounce";
-import { searchCache, searchVar } from "./localState/cache";
-import { SEARCH_PRODUCT } from "./localState/localQuery";
+import { useEffect, useState } from "react";
 
-export const debouncedWriteSearch = debounce((text: string) => {
-  searchCache.writeQuery({
-    query: SEARCH_PRODUCT,
-    data: {
-      searchText: searchVar(text),
-    },
-  });
-}, 500);
+export  function useDebouncedValue<T>(value:T, time:number):T {
+  const [debounced, setDebounced] = useState<T>(value);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebounced(value);
+    }, time);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, time]);
+
+  return debounced;
+}

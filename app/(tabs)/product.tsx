@@ -1,15 +1,14 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
-import { View, Text, FlatList, ActivityIndicator } from "react-native";
-import { useRouter } from "expo-router";
 import { useReactiveVar } from "@apollo/client";
+import { useRouter } from "expo-router";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
-import CustomButton from "../../components/CustomButton";
+import { searchVar } from "@/components/localState/cache";
 import { ProductCard } from "@/components/productCard";
+import { SearchInput } from "@/components/SearchBox";
 import { useFetch } from "@/hooks/getFetch";
 import { useCart } from "@/store/store";
-import { searchVar } from "@/components/localState/cache";
-import { SearchInput } from "@/components/SearchBox";
-import { debouncedWriteSearch } from "@/components/Debounceforsearch";
+import CustomButton from "../../components/CustomButton";
 
 export default function ProductScreen() {
   const router = useRouter();
@@ -39,7 +38,6 @@ export default function ProductScreen() {
       title: searchText,
     },
   });
-
 
   useEffect(() => {
     if (!data) return;
@@ -86,14 +84,10 @@ export default function ProductScreen() {
   return (
     <View className="flex-1 bg-white">
       <View>
-         <>
-            <Text className="text-2xl font-bold mb-3 px-4">Products</Text>
-            <SearchInput
-              value={searchText || ""}
-              placeholder="Search products..."
-              onChange={debouncedWriteSearch}
-            />
-          </>
+        <>
+          <Text className="text-2xl font-bold mb-3 px-4">Products</Text>
+          <SearchInput placeholder="Search products..." />
+        </>
       </View>
       <FlatList
         data={products}
@@ -113,7 +107,6 @@ export default function ProductScreen() {
             />
           </View>
         )}
-       
         ListFooterComponent={
           <>
             {isFetching && page > 1 && (

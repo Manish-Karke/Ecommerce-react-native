@@ -121,7 +121,7 @@ export default function UserList() {
 
   return (
     <View className="flex-1 p-4 bg-white">
-      {/* User List */}
+    
       <FlatList
         data={users}
         keyExtractor={(item) => item.id.toString()}
@@ -160,7 +160,7 @@ export default function UserList() {
         )}
       />
 
-      {/* ADD USER MODAL */}
+    
       <Modal
         visible={addOpen}
         transparent

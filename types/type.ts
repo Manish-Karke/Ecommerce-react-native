@@ -104,3 +104,8 @@ export type AddUserFormValues = {
   role: string;
   avatar: string;
 };
+
+export type ProductAction =
+  | { type: "SET_PRODUCTS"; payload: any[] }
+  | { type: "APPEND_PRODUCTS"; payload: any[] }
+  | { type: "RESET" };

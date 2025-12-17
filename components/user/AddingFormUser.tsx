@@ -1,4 +1,4 @@
-import { FormInput } from "@/components/formResuable";
+import { FormInput } from "@/components/FormResuable";
 import { AddUserFormValues } from "@/types/type";
 import React from "react";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
@@ -20,8 +20,6 @@ export default function AddUserForm({
   const { errors } = formState;
   return (
     <View>
-      
-
       <FormInput
         control={control}
         name="name"

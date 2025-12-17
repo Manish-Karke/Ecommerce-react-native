@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 import { useForm } from "react-hook-form";
 import { Text, View } from "react-native";
 import CustomButton from "../../components/CustomButton";
-import { FormInput } from "../../components/formResuable";
+import { FormInput } from "../../components/FormResuable";
 import { LoginFormType, LoginSchema } from "../../utils/schema";
 export default function Login() {
   const router = useRouter();
@@ -18,7 +18,9 @@ export default function Login() {
     resolver: zodResolver(LoginSchema),
   });
 
-  const { mutateAsync, isPending, isError } = useSendPost<{ access_token: string }>({
+  const { mutateAsync, isPending, isError } = useSendPost<{
+    access_token: string;
+  }>({
     url: "/auth/login",
   });
 

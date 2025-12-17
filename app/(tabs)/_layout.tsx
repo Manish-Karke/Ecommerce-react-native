@@ -1,26 +1,25 @@
-import React from "react";
-import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Tabs } from "expo-router";
+import React from "react";
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#2563eb", 
-        tabBarInactiveTintColor: "#9ca3af", 
-         headerShown: false,
+        tabBarActiveTintColor: "#2563eb",
+        tabBarInactiveTintColor: "#9ca3af",
+        headerShown: false,
         tabBarStyle: {
           backgroundColor: "#ffffff",
           borderTopWidth: 1,
           borderTopColor: "#e5e7eb",
           height: 60,
-      
         },
         tabBarLabelStyle: {
           fontSize: 12,
           fontWeight: "600",
         },
-       
+
         headerStyle: {
           backgroundColor: "#2563eb",
         },
@@ -30,22 +29,16 @@ export default function TabsLayout() {
         },
       }}
     >
-    
-    
-     
       <Tabs.Screen
         name="product"
         options={{
           title: "Product",
           tabBarIcon: ({ color, size }) => (
-           <AntDesign name="product" size={24} color={color} />
+            <AntDesign name="product" size={24} color={color} />
           ),
         }}
       />
 
- 
-
-    
       <Tabs.Screen
         name="profile"
         options={{
@@ -56,7 +49,7 @@ export default function TabsLayout() {
         }}
       />
 
-       <Tabs.Screen
+      <Tabs.Screen
         name="cart"
         options={{
           title: "Cart",
@@ -66,7 +59,15 @@ export default function TabsLayout() {
         }}
       />
 
-     
+      <Tabs.Screen
+        name="graphqlProfile"
+        options={{
+          title: "GraphQL",
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="profile" size={size} color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

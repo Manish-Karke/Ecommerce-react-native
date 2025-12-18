@@ -1,11 +1,11 @@
-import AddUserForm from "@/components/User/AddingFormUser";
-import { QUERY_UPDATEUSER, } from "@/graphql/mutation";
+import AddUserForm from "@/components/User/AddUser";
+import { QUERY_UPDATEUSER } from "@/graphql/mutation";
+import { QUERY_USERLIST } from "@/graphql/query";
+import { AddUserFormValues, Users } from "@/types/type";
 import { useMutation } from "@apollo/client";
 import { useEffect } from "react";
 import { SubmitHandler, UseFormReturn } from "react-hook-form";
-import { ActivityIndicator, Pressable, Text, View, Modal } from "react-native";
-import { AddUserFormValues, Users } from "@/types/type";
-import { QUERY_USERLIST } from "@/graphql/query";
+import { Modal, Pressable, Text, View } from "react-native";
 
 interface EditUserModalProps {
   visible: boolean;
@@ -48,7 +48,9 @@ export default function EditUserModal({
           email: form.getValues("email"),
           role: form.getValues("role"),
           avatar: form.getValues("avatar"),
-          ...(form.getValues("password") ? { password: form.getValues("password") } : {}),
+          ...(form.getValues("password")
+            ? { password: form.getValues("password") }
+            : {}),
         },
       },
     });
@@ -58,7 +60,12 @@ export default function EditUserModal({
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal
+      visible={visible}
+      transparent
+      animationType="fade"
+      onRequestClose={onClose}
+    >
       <View className="flex-1 bg-black/50 justify-center px-4">
         <View className="bg-white rounded-2xl p-4">
           <View className="flex-row justify-between items-center mb-3">

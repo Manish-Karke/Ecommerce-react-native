@@ -1,4 +1,4 @@
-import AddUserForm from "@/components/User/AddingFormUser";
+import AddUserForm from "@/components/User/AddUser";
 import { QUERY_ADDUSER, QUERY_UPDATEUSER } from "@/graphql/mutation";
 import { QUERY_USERLIST } from "@/graphql/query";
 import { useMutation, useQuery } from "@apollo/client";
@@ -86,18 +86,19 @@ export default function UserList() {
 
     try {
       await UPDATEUSER({
-  variables: {
-    id: selectedUser.id,
-    changes: {
-      name: editForm.getValues("name"),
-      email: editForm.getValues("email"),
-      role: editForm.getValues("role"),
-      avatar: editForm.getValues("avatar"),
-      ...(editForm.getValues("password") ? { password: editForm.getValues("password") } : {}),
-    },
-  },
-});
-
+        variables: {
+          id: selectedUser.id,
+          changes: {
+            name: editForm.getValues("name"),
+            email: editForm.getValues("email"),
+            role: editForm.getValues("role"),
+            avatar: editForm.getValues("avatar"),
+            ...(editForm.getValues("password")
+              ? { password: editForm.getValues("password") }
+              : {}),
+          },
+        },
+      });
 
       alert("User updated ✅");
       setEditOpen(false);
@@ -121,7 +122,6 @@ export default function UserList() {
 
   return (
     <View className="flex-1 p-4 bg-white">
-    
       <FlatList
         data={users}
         keyExtractor={(item) => item.id.toString()}
@@ -160,7 +160,6 @@ export default function UserList() {
         )}
       />
 
-    
       <Modal
         visible={addOpen}
         transparent

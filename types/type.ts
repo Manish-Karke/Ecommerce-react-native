@@ -109,3 +109,18 @@ export type ProductAction =
   | { type: "SET_PRODUCTS"; payload: any[] }
   | { type: "APPEND_PRODUCTS"; payload: any[] }
   | { type: "RESET" };
+
+
+export interface ComboBoxMenu {
+  visible: boolean;
+  handleClose: () => void;
+  handleOpen: () => void;
+  trigger: React.ReactNode;
+  children: React.ReactNode;
+  dropDownWidth?: number;
+}
+export type MenuOptionProps = {
+  label: any;
+  value: string;
+  onSelect: (value: string) => void;
+};

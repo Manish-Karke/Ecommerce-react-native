@@ -67,6 +67,14 @@ export default function TabsLayout() {
             <AntDesign name="profile" size={size} color={color} />
           ),
         }}
+      /><Tabs.Screen
+        name="combo"
+        options={{
+          title: "DropDown",
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="profile" size={size} color={color} />
+          ),
+        }}
       />
     </Tabs>
   );

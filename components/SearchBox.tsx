@@ -1,5 +1,4 @@
 import { AntDesign } from "@expo/vector-icons";
-import debounce from "lodash.debounce";
 import React, { useState } from "react";
 import { TextInput, View } from "react-native";
 import { searchCache, searchVar } from "./localState/cache";
